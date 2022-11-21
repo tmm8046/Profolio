@@ -32,6 +32,14 @@ const DomoForm = (props) => {
             <label htmlFor="age">Age: </label>
             <input id="domoAge" type="number" min="0" name="age" />
             <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
+            <form ref='uploadForm' 
+            id='uploadForm' 
+            action='/upload' 
+            method='POST' 
+            encType="multipart/form-data">
+                <input type="file" name="sampleFile" />
+                <input type='submit' value='Upload!' />
+            </form> 
             <input className="makeDomoSubmit" type="submit" value="Make Domo" />
 
         </form>
@@ -73,9 +81,27 @@ const loadDomosFromServer = async () => {
     )
 }
 
+const uploadFile = async (e) => {
+    e.preventDefault();
+
+    const response = await fetch('/upload',{
+        method: 'POST',
+        body: new FormData(e.target),
+    });
+
+    const text = await response.text();
+    document.getElementById('messages').innerText = text;
+
+    return false;
+};
+
 const init = async () => {
     const response = await fetch('/getToken');
     const data = await response.json();
+
+    //Upload File
+    const uploadForm = document.getElementById('uploadForm');
+    uploadForm.addEventListener('submit', uploadFile);
 
     ReactDOM.render(
         <DomoForm csrf={data.csrfToken} />,
