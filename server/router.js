@@ -1,6 +1,6 @@
 const controllers = require('./controllers');
 const mid = require('./middleware');
-const file = require('./controllers/files.js');
+const file = require('./controllers/Files.js');
 
 const router = (app) => {
   app.get('/getToken', mid.requiresSecure, controllers.Account.getToken);

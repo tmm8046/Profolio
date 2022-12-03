@@ -1,6 +1,6 @@
 const helper = require('./helper.js');
 
-const handleDomo = (e) => {
+const handleProject = (e) => {
     e.preventDefault();
     helper.hideError();
 
@@ -21,7 +21,7 @@ const handleDomo = (e) => {
 const DomoForm = (props) => {
     return (
         <form id="domoForm"
-        onsubmit={handleDomo}
+        onsubmit={handleProject}
         name="domoForm"
         action="/maker"
         method="POST"
@@ -72,7 +72,7 @@ const DomoList = (props) => {
     );
 }
 
-const loadDomosFromServer = async () => {
+const loadProjectsFromServer = async () => {
     const response = await fetch('/getDomos');
     const data = await response.json();
     ReactDOM.render(
@@ -113,7 +113,7 @@ const init = async () => {
         document.getElementById('domos')
     )
 
-    loadDomosFromServer();
+    loadProjectsFromServer();
 }
 
 window.onload = init;

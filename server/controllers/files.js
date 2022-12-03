@@ -1,7 +1,7 @@
-const File = require('../models/file.js');
+const File = require('../models/File.js');
 
 const uploadPage = (req, res) => {
-  res.render('upload');
+  res.render('app');
 };
 
 const uploadFile = async (req, res) => {
