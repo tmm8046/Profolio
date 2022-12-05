@@ -28,9 +28,9 @@ const DomoForm = (props) => {
         className="domoForm"
         >
             <label htmlFor="name">Name: </label>
-            <input id='domoName' type="text" name="name" placeholder="Domo Name" />
+            <input className = "userInput" id='domoName' type="text" name="name" placeholder="Domo Name" />
             <label htmlFor="age">Age: </label>
-            <input id="domoAge" type="number" min="0" name="age" />
+            <input className = "userInput" id="domoAge" type="number" min="0" name="age" />
             <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
             <form ref='uploadForm' 
             id='uploadForm' 

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Poppins:wght@200&family=Raleway&display=swap');
 *{
     font-family: 'Raleway', sans-serif;
-    color: white;
+    color: black;
 }
 
 html, body {
@@ -76,6 +76,7 @@ nav:nth-child(1) {
 
 .domoForm input[type=text] {
     float:left;
+    background-color: black;
 }
 
 .makeDomoSubmit {
