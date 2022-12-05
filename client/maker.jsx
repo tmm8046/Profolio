@@ -4,8 +4,8 @@ const handleProject = (e) => {
     e.preventDefault();
     helper.hideError();
 
-    const name = e.target.querySelector('#domoName').value;
-    const age = e.target.querySelector('#domoAge').value;
+    const name = e.target.querySelector('#projectName').value;
+    const age = e.target.querySelector('#projectAge').value;
     const _csrf = e.target.querySelector('#_csrf').value;
 
     if(!name || !age) {
@@ -13,24 +13,24 @@ const handleProject = (e) => {
         return false;
     }
 
-    sendPost(e.target.action, {name, age, _csrf}, loadDomosFromServer);
+    sendPost(e.target.action, {name, age, _csrf}, loadProjectsFromServer);
 
     return false;
 }
 
-const DomoForm = (props) => {
+const ProjectForm = (props) => {
     return (
-        <form id="domoForm"
+        <form id="projectForm"
         onsubmit={handleProject}
-        name="domoForm"
+        name="projectForm"
         action="/maker"
         method="POST"
-        className="domoForm"
+        className="projectForm"
         >
             <label htmlFor="name">Name: </label>
-            <input className = "userInput" id='domoName' type="text" name="name" placeholder="Domo Name" />
+            <input className = "userInput" id='projectName' type="text" name="name" placeholder="Project Name" />
             <label htmlFor="age">Age: </label>
-            <input className = "userInput" id="domoAge" type="number" min="0" name="age" />
+            <input className = "userInput" id="projectAge" type="number" min="0" name="age" />
             <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
             <form ref='uploadForm' 
             id='uploadForm' 
@@ -40,44 +40,44 @@ const DomoForm = (props) => {
                 <input type="file" name="sampleFile" />
                 <input type='submit' value='Upload!' />
             </form> 
-            <input className="makeDomoSubmit" type="submit" value="Make Domo" />
+            <input className="makeProjectSubmit" type="submit" value="Make Project" />
 
         </form>
     )
 }
 
-const DomoList = (props) => {
-    if(props.domos.length === 0) {
+const ProjectList = (props) => {
+    if(props.projects.length === 0) {
         return (
-            <div className="domoList">
-                <h3 className="emptyDomo">No Domos Yet!</h3>
+            <div className="projectList">
+                <h3 className="emptyProject">No Projects Yet!</h3>
             </div>
         );
     }
 
-    const domoNodes = props.domos.map(domo => {
+    const projectNodes = props.projects.map(project => {
         return (
-            <div key={domo.id} className = "domo">
-                <img src="/assets/img/domoface.jpeg" alt="domo face" className="domoFace" />
-                <h3 className="domoName"> Name: {domo.name} </h3>
-                <h3 className="domoAge"> Age: {domo.age} </h3>
+            <div key={project.id} className = "project">
+                <img src="/assets/img/projectface.jpeg" alt="project face" className="projectFace" />
+                <h3 className="projectName"> Name: {project.name} </h3>
+                <h3 className="projectAge"> Age: {project.age} </h3>
             </div>
         );
     });
 
     return (
-        <div className="domoList">
-            {domoNodes}
+        <div className="projectList">
+            {projectNodes}
         </div>
     );
 }
 
 const loadProjectsFromServer = async () => {
-    const response = await fetch('/getDomos');
+    const response = await fetch('/getProjects');
     const data = await response.json();
     ReactDOM.render(
-        <DomoList domos={data.domos} />,
-        document.getElementById('domos')
+        <ProjectList project={data.project} />,
+        document.getElementById('projects')
     )
 }
 
@@ -104,13 +104,13 @@ const init = async () => {
     uploadForm.addEventListener('submit', uploadFile);
 
     ReactDOM.render(
-        <DomoForm csrf={data.csrfToken} />,
-        document.getElementById('makeDomo')
+        <ProjectForm csrf={data.csrfToken} />,
+        document.getElementById('makeProject')
     );
 
     ReactDOM.render(
-        <DomoList domos={[]} />,
-        document.getElementById('domos')
+        <ProjectList projects={[]} />,
+        document.getElementById('projects')
     )
 
     loadProjectsFromServer();
