@@ -51,6 +51,6 @@ ProjSchema.statics.findByOwner = (ownerId, callback) => {
   return Project.find(search).select('name age').lean().exec(callback);
 };
 
-Project = mongoose.model('Domo', ProjSchema);
+Project = mongoose.model('Project', ProjSchema);
 
 module.exports = Project;

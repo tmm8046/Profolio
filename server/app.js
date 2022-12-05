@@ -39,7 +39,7 @@ app.use(session({
   store: new RedisStore({
     client: redisClient,
   }),
-  secret: 'Domo Arigato',
+  secret: 'Project Arigato',
   resave: true,
   saveUninitialized: true,
   cookie: {
@@ -59,7 +59,7 @@ app.use(bodyParser.json());
 
 app.use(session({
   key: 'sessionid',
-  secret: 'Domo Arigato',
+  secret: 'Project Arigato',
   resave: true,
   saveUninitialized: true,
 }));
