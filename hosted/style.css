@@ -256,7 +256,7 @@ h3.projectName {
     font-size: 1.5em;
 }
 
-h3.projectAge {
+h3.projectDesc {
     float:right;
     text-align: left;
     width: 100px;

@@ -59,8 +59,9 @@ const ProjectList = (props) => {
         return (
             <div key={project.id} className = "project">
                 <img src="/assets/img/projectface.jpeg" alt="project face" className="projectFace" />
-                <h3 className="projectName"> Name: {project.name} </h3>
-                <h3 className="projectAge"> Age: {project.age} </h3>
+                <h3 className="projectName">{project.name} </h3>
+                <h3 className="projectDesc">{project.desc} </h3>
+                <img src={project.img} alt={project.name} />
             </div>
         );
     });
