@@ -5,15 +5,15 @@ const handleProject = (e) => {
     helper.hideError();
 
     const name = e.target.querySelector('#projectName').value;
-    const age = e.target.querySelector('#projectAge').value;
+    const desc = e.target.querySelector('#projectDesc').value;
     const _csrf = e.target.querySelector('#_csrf').value;
 
-    if(!name || !age) {
+    if(!name || !desc) {
         helper.handleError('All field are required! ');
         return false;
     }
 
-    sendPost(e.target.action, {name, age, _csrf}, loadProjectsFromServer);
+    sendPost(e.target.action, {name, desc, _csrf}, loadProjectsFromServer);
 
     return false;
 }
@@ -29,20 +29,25 @@ const ProjectForm = (props) => {
         >
             <label htmlFor="name">Name: </label>
             <input className = "userInput" id='projectName' type="text" name="name" placeholder="Project Name" />
-            <label htmlFor="age">Age: </label>
-            <input className = "userInput" id="projectAge" type="number" min="0" name="age" />
+            <label htmlFor="desc">Description: </label>
+            <input className = "userInput" id="projectDescprojectDesc" type="number" min="0" name="age" />
             <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
-            <form ref='uploadForm' 
-            id='uploadForm' 
-            action='/upload' 
-            method='POST' 
-            encType="multipart/form-data">
-                <input type="file" name="sampleFile" />
-                <input type='submit' value='Upload!' />
-            </form> 
             <input className="makeProjectSubmit" type="submit" value="Make Project" />
 
         </form>
+    )
+}
+
+const UploadForm = () => {
+    return (
+        <form ref='uploadForm' 
+        id='uploadForm' 
+        action='/upload' 
+        method='POST' 
+        encType="multipart/form-data">
+            <input type="file" name="sampleFile" />
+            <input type='submit' value='Upload!' />
+        </form> 
     )
 }
 
@@ -107,6 +112,11 @@ const init = async () => {
     ReactDOM.render(
         <ProjectForm csrf={data.csrfToken} />,
         document.getElementById('makeProject')
+    );
+
+    ReactDOM.render(
+        <UploadForm csrf={data.csrfToken} />,
+        document.getElementById('uploadImage')
     );
 
     ReactDOM.render(
