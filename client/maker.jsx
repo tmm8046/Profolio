@@ -32,26 +32,28 @@ const ProjectForm = (props) => {
             <label htmlFor="desc">Description: </label>
             <textarea className = "userInput" id="projectDesc" type="string" name="desc" />
             <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
+            <input type="file" name="sampleFile" />
+            <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
             <input className="makeProjectSubmit" type="submit" value="Make Project" />
 
         </form>
     )
 }
 
-const UploadForm = () => {
-    return (
-        <form ref='uploadForm' 
-        onsubmit={uploadFile}
-        name='uploadForm'
-        id='uploadForm' 
-        action='/upload' 
-        method='POST' 
-        encType="multipart/form-data">
-            <input type="file" name="sampleFile" />
-            <input type='submit' value='Upload!' />
-        </form> 
-    )
-}
+// const UploadForm = (props) => {
+//     return (
+//         <form id='uploadForm' 
+//         onsubmit={uploadFile}
+//         name='uploadForm'
+//         action='/upload' 
+//         method='POST' 
+//         encType="multipart/form-data">
+//             <input type="file" name="sampleFile" />
+//             <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
+//             <input type='submit' value='Upload!' />
+//         </form> 
+//     )
+// }
 
 const ProjectList = (props) => {
     if(props.projects.length === 0) {
@@ -107,19 +109,15 @@ const init = async () => {
     const response = await fetch('/getToken');
     const data = await response.json();
 
-    //Upload File
-    // const uploadForm = document.getElementById('uploadForm');
-    // uploadForm.addEventListener('submit', uploadFile);
-
     ReactDOM.render(
         <ProjectForm csrf={data.csrfToken} />,
         document.getElementById('makeProject')
     );
 
-    ReactDOM.render(
-        <UploadForm csrf={data.csrfToken} />,
-        document.getElementById('uploadImage')
-    );
+    // ReactDOM.render(
+    //     <UploadForm csrf={data.csrfToken} />,
+    //     document.getElementById('uploadImage')
+    // );
 
     ReactDOM.render(
         <ProjectList projects={[]} />,

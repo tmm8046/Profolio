@@ -14,11 +14,11 @@ const router = (app) => {
   app.get('/logout', mid.requiresLogin, controllers.Account.logout);
 
   app.get('/maker', mid.requiresLogin, controllers.Project.makerPage);
-  app.post('/maker', mid.requiresLogin, controllers.Project.makeProject);
+  app.post('/maker', mid.requiresLogin, controllers.Project.makeProject, file.uploadFile);
 
   app.get('/', mid.requiresSecure, mid.requiresLogout, file.uploadPage, controllers.Account.loginPage);
 
-  app.post('/upload', file.uploadFile);
+  // app.post('/upload', file.uploadFile);
   app.get('/retrieve', file.retrieveFile);
 };
 

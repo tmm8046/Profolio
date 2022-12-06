@@ -16,7 +16,7 @@ const ProjSchema = new mongoose.Schema({
   },
   img: {
     type: String,
-    required: true,
+    required: false,
     trim: true,
     set: setImage,
   },
