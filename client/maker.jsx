@@ -30,7 +30,7 @@ const ProjectForm = (props) => {
             <label htmlFor="name">Name: </label>
             <input className = "userInput" id='projectName' type="text" name="name" placeholder="Project Name" />
             <label htmlFor="desc">Description: </label>
-            <input className = "userInput" id="projectDescprojectDesc" type="number" min="0" name="age" />
+            <textarea className = "userInput" id="projectDesc" type="string" name="desc" />
             <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
             <input className="makeProjectSubmit" type="submit" value="Make Project" />
 
@@ -41,6 +41,8 @@ const ProjectForm = (props) => {
 const UploadForm = () => {
     return (
         <form ref='uploadForm' 
+        onsubmit={uploadFile}
+        name='uploadForm'
         id='uploadForm' 
         action='/upload' 
         method='POST' 
@@ -106,8 +108,8 @@ const init = async () => {
     const data = await response.json();
 
     //Upload File
-    const uploadForm = document.getElementById('uploadForm');
-    uploadForm.addEventListener('submit', uploadFile);
+    // const uploadForm = document.getElementById('uploadForm');
+    // uploadForm.addEventListener('submit', uploadFile);
 
     ReactDOM.render(
         <ProjectForm csrf={data.csrfToken} />,
