@@ -2,15 +2,18 @@ const models = require('../models');
 
 const { Account } = models;
 
+//Login
 const loginPage = (req, res) => {
   res.render('login', { csrfToken: req.csrfToken() });
 };
 
+//Logout
 const logout = (req, res) => {
   req.session.destroy();
   res.redirect('/');
 };
 
+//handles login request
 const login = (req, res) => {
   const username = `${req.body.username}`;
   const pass = `${req.body.pass}`;
@@ -30,6 +33,7 @@ const login = (req, res) => {
   });
 };
 
+//Handles signup request
 const signup = async (req, res) => {
   const username = `${req.body.username}`;
   const pass = `${req.body.pass}`;

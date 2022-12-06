@@ -1,9 +1,11 @@
 const File = require('../models/File.js');
 
+//Upload page
 const uploadPage = (req, res) => {
   res.render('app');
 };
 
+//Handles file upload request
 const uploadFile = async (req, res) => {
   if (!req.files || !req.files.sampleFile) {
     return res.status(400).json({ error: 'No files were uploaded' });
@@ -26,7 +28,8 @@ const uploadFile = async (req, res) => {
   }
 };
 
-const retrieveFile = async (req, res) => {
+//Gets file from server
+const getFile = async (req, res) => {
   if (!req.query._id) {
     return res.status(400).json({ error: 'Missing file id!' });
   }
@@ -58,5 +61,5 @@ const retrieveFile = async (req, res) => {
 module.exports = {
   uploadPage,
   uploadFile,
-  retrieveFile,
+  getFile,
 };

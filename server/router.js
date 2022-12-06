@@ -19,7 +19,7 @@ const router = (app) => {
   app.get('/', mid.requiresSecure, mid.requiresLogout, file.uploadPage, controllers.Account.loginPage);
 
   // app.post('/upload', file.uploadFile);
-  app.get('/retrieve', file.retrieveFile);
+  app.get('/retrieve', file.getFile);
 };
 
 module.exports = router;

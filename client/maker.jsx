@@ -27,6 +27,7 @@ const handleProject = async(e) => {
     return false;
 }
 
+//Form to create project
 const ProjectForm = (props) => {
     return (
         <form id="projectForm"
@@ -63,6 +64,7 @@ const ProjectForm = (props) => {
 //     )
 // }
 
+//handles the collection of projects
 const ProjectList = (props) => {
     if(props.projects.length === 0) {
         return (
@@ -90,6 +92,7 @@ const ProjectList = (props) => {
     );
 }
 
+//Loads in each project to the page
 const loadProjectsFromServer = async () => {
     const response = await fetch('/getProjects');
     const data = await response.json();
