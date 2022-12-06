@@ -1,6 +1,7 @@
 const helper = require('./helper.js');
 
-const handleProject = (e) => {
+//Handles the informtation from the form
+const handleProject = async(e) => {
     e.preventDefault();
     helper.hideError();
 
@@ -12,6 +13,14 @@ const handleProject = (e) => {
         helper.handleError('All field are required! ');
         return false;
     }
+
+    const response = await fetch('/maker',{
+        method: 'POST',
+        body: new FormData(e.target),
+    });
+
+    const text = await response.text();
+    document.getElementById('messages').innerText = text;
 
     sendPost(e.target.action, {name, desc, _csrf}, loadProjectsFromServer);
 
@@ -31,7 +40,6 @@ const ProjectForm = (props) => {
             <input className = "userInput" id='projectName' type="text" name="name" placeholder="Project Name" />
             <label htmlFor="desc">Description: </label>
             <textarea className = "userInput" id="projectDesc" type="string" name="desc" />
-            <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
             <input type="file" name="sampleFile" />
             <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
             <input className="makeProjectSubmit" type="submit" value="Make Project" />
@@ -90,20 +98,6 @@ const loadProjectsFromServer = async () => {
         document.getElementById('projects')
     )
 }
-
-const uploadFile = async (e) => {
-    e.preventDefault();
-
-    const response = await fetch('/upload',{
-        method: 'POST',
-        body: new FormData(e.target),
-    });
-
-    const text = await response.text();
-    document.getElementById('messages').innerText = text;
-
-    return false;
-};
 
 const init = async () => {
     const response = await fetch('/getToken');
