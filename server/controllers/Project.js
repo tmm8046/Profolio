@@ -4,7 +4,7 @@ const { Project } = models;
 
 const makerPage = (req, res) => res.render('app');
 
-//Retrieves Projects from server
+// Retrieves Projects from server
 const getProjects = (req, res) => Project.findByOwner(req.session.account._id, (err, docs) => {
   if (err) {
     console.log(err);
@@ -13,7 +13,7 @@ const getProjects = (req, res) => Project.findByOwner(req.session.account._id, (
   return res.json({ Projects: docs });
 });
 
-//Handles create project request
+// Handles create project request
 const makeProject = async (req, res) => {
   if (!req.body.name || !req.body.desc) {
     return res.status(400).json({ error: 'Both name and description are required!' });
